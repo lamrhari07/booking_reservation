@@ -3,7 +3,7 @@ from django.db import models, transaction
 from django.db.models.signals import post_save
 from django.utils import timezone
 from django.utils.translation import ugettext as _
-from django.dispatch import Signal, receiver
+from django.dispatch import receiver
 
 
 class ProfileManager(models.Manager):
@@ -18,6 +18,7 @@ class ProfileManager(models.Manager):
         if profile:
             self.create(user=user, **extra)
         return user
+
 
 class ProfileModel(models.Model):
     '''
@@ -68,19 +69,28 @@ class AddressModel(models.Model):
         return self.address_1
 
 
-class BookingModel(models.Model):
+class Reservation(models.Model):
+    STATUS = (
+        (0, _("Requested")),
+        (1, _("Accepted")),
+        (2, _("Denied"))
+    )
 
-    booker = models.ForeignKey(
-        User,
+    user = models.ForeignKey(
+        ProfileModel,
         on_delete=models.CASCADE,
         default='',
         related_name='booker'
     )
-    text = models.TextField(_('Purpose for Booking'), max_length=2500, default='')
-    created_date = models.DateTimeField(_('Booked at'), default=timezone.now)
+    observation = models.TextField(_('Observation'), max_length=2500, default='')
+    reserved_start_date = models.DateTimeField(default=timezone.now)
+    reserved_end_date = models.DateTimeField(default=timezone.now() + timezone.timedelta(days=15), null=True)
+    status = models.SmallIntegerField(choices=STATUS, default=0)
+    updated_datetime = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.booker
+        return self.user.user.username
+
 
 @receiver(post_save, sender=ProfileModel)
 def create_user_profile(sender, instance, created, **kwargs):
