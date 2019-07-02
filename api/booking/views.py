@@ -10,7 +10,7 @@ from api.booking.serializers import (
 
 class ReservationView(generics.ListCreateAPIView):
     """
-        Endpoint For Reservation.
+        Create/List Endpoint For Reservation.
     """
     serializer_class = ReservationSerializer
     queryset = Reservation.objects.all()

@@ -1,9 +1,12 @@
 from django.urls import path
-from api.auth.views import LogoutView, UserRegistrationView, UserLoginViews, UserProfileView
+from api.blog.views import (
+    BlogListView,
+    BlogView,
+    BlogUpdateView
+)
 
 urlpatterns = [
-    path('registration/', UserRegistrationView.as_view(), name='user_registration'),
-    path('login/', UserLoginViews.as_view(), name='user_login'),
-    path('profile/', UserProfileView.as_view(), name='user_profile'),
-    path('logout/', LogoutView.as_view(), name='user_logout'),
+    path('', BlogListView.as_view(), name='all_blog'),
+    path('<user>/blog', BlogView.as_view(), name='user_blog'),
+    path('<user>/blog/<int:pk>', BlogUpdateView.as_view(), name='update_blog'),
 ]
