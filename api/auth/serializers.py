@@ -3,7 +3,17 @@ from django.utils.translation import ugettext_lazy as _
 from rest_framework import serializers, exceptions
 from django.conf import settings
 
-from api.models import ProfileModel, User
+from api.models import ProfileModel, User, AddressModel
+
+
+
+
+class JWTSerializer(serializers.Serializer):
+    '''
+        Serializer for JWT authentication.
+    '''
+    token = serializers.CharField()
+    message = serializers.CharField()
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -23,6 +33,24 @@ class UserSerializer(serializers.ModelSerializer):
             'date_joined'
         )
 
+class AddressSerializer(serializers.ModelSerializer):
+    '''
+        Serializer for Address Model.
+    '''
+    latitude = serializers.FloatField(read_only=True)
+    longitude = serializers.FloatField(read_only=True)
+    class Meta:
+        model = AddressModel
+        fields = (
+            'address_1',
+            'address_2',
+            'zip_code',
+            'state',
+            'city',
+            'country',
+            'latitude',
+            'longitude',
+        )
 
 class ProfileSerializer(serializers.ModelSerializer):
     '''
@@ -30,6 +58,7 @@ class ProfileSerializer(serializers.ModelSerializer):
     '''
     avatar = serializers.ImageField(required=False)
     user = UserSerializer()
+    address = AddressSerializer()
     class Meta:
         model = ProfileModel
         fields =(
@@ -42,6 +71,7 @@ class ProfileSerializer(serializers.ModelSerializer):
         depth=2
 
     def update(self, instance, validated_data):
+
         user = validated_data.pop('user')
 
         instance.user.username = user.get('username', instance.user.username)
@@ -49,6 +79,16 @@ class ProfileSerializer(serializers.ModelSerializer):
         instance.user.first_name = user.get('first_name', instance.user.first_name)
         instance.user.last_name = user.get('last_name', instance.user.last_name)
         instance.user.save()
+
+        address = validated_data.pop('address')
+
+        instance.address.address_1 = address.get('address_1', instance.address.address_1)
+        instance.address.address_2 = address.get('address_2', instance.address.address_2)
+        instance.address.zip_code = address.get('zip_code', instance.address.zip_code)
+        instance.address.state = address.get('state', instance.address.state)
+        instance.address.city = address.get('city', instance.address.city)
+        instance.address.country = address.get('country', instance.address.country)
+        instance.address.save()
 
         instance.avatar = validated_data.get('avatar', instance.avatar)
         instance.birth_date = validated_data.get('birth_date', instance.birth_date)
@@ -58,14 +98,6 @@ class ProfileSerializer(serializers.ModelSerializer):
         instance.save()
 
         return instance
-
-
-class JWTSerializer(serializers.Serializer):
-    '''
-        Serializer for JWT authentication.
-    '''
-    token = serializers.CharField()
-    message = serializers.CharField()
 
 
 class UserRegistrationSerializer(serializers.Serializer):
