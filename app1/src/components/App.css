@@ -1,0 +1,154 @@
+.userBlock{
+    float: left;
+    width: 100%;
+    box-shadow: 0px 0px 23px -3px #ccc;
+    padding-bottom: 12px;
+    margin-bottom: 30px;
+    overflow: hidden;
+    background:#fff;
+    
+  
+  }
+.userBlock .backgrounImg{
+    float: left;
+    overflow: hidden;
+    height: 77px;
+  }
+.userBlock .backgrounImg img{
+    width: auto;
+  }
+.userBlock .userImg{
+    text-align: center;
+  }
+.userBlock .userImg img{
+    width: 80px;
+    height: 80px;
+    margin-top: -39px;
+    border-radius: 100%;
+    border: 5px solid #fff;
+    
+  }
+.userBlock .userDescription{
+    text-align: center;
+  }
+.userBlock .userDescription h5{
+    margin-bottom: 2px;
+    font-weight: 600;
+  }
+
+.userBlock .userDescription p{
+    margin-bottom: 5px;
+  }
+
+.userBlock .userDescription .btn{
+    padding: 0px 23px 0px 23px;
+    height: 22px;
+    border-radius: 0;
+    font-size: 12px;
+    background: #0198dd;
+    color: #fff;
+  }
+
+.userBlock .userDescription .btn:hover{
+    
+    opacity:0.7;
+  }
+  
+.userBlock .followrs{
+    display: inline-flex;
+    margin-right: 10px;
+    border-right: 1px solid #ccc;
+    padding-right: 10px;
+  }
+.userBlock .followrs .number{
+    font-size: 15px;
+    font-weight: bold;
+    margin-right: 5px;
+    margin-top: -1px;
+  }
+
+  /* LOADING STYLES
+-------------------------------------------------- */
+/* ---------------------------------------------- */
+/* --------------------------------------------- */
+
+.ld {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  min-height: 100vh;
+  background-color: #fff;
+}
+
+.loader {
+  max-width: 15rem;
+  width: 100%;
+  height: auto;
+  stroke-linecap: round;
+}
+
+circle {
+  fill: none;
+  stroke-width: 3.5;
+  -webkit-animation-name: preloader;
+          animation-name: preloader;
+  -webkit-animation-duration: 3s;
+          animation-duration: 3s;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+  -webkit-animation-timing-function: ease-in-out;
+          animation-timing-function: ease-in-out;
+  -webkit-transform-origin: 170px 170px;
+          transform-origin: 170px 170px;
+  will-change: transform;
+}
+circle:nth-of-type(1) {
+  stroke-dasharray: 550;
+}
+circle:nth-of-type(2) {
+  stroke-dasharray: 500;
+}
+circle:nth-of-type(3) {
+  stroke-dasharray: 450;
+}
+circle:nth-of-type(4) {
+  stroke-dasharray: 300;
+}
+circle:nth-of-type(1) {
+  -webkit-animation-delay: -0.15s;
+          animation-delay: -0.15s;
+}
+circle:nth-of-type(2) {
+  -webkit-animation-delay: -0.3s;
+          animation-delay: -0.3s;
+}
+circle:nth-of-type(3) {
+  -webkit-animation-delay: -0.45s;
+  -moz-animation-delay:  -0.45s;
+          animation-delay: -0.45s;
+}
+circle:nth-of-type(4) {
+  -webkit-animation-delay: -0.6s;
+  -moz-animation-delay: -0.6s;
+          animation-delay: -0.6s;
+}
+
+@-webkit-keyframes preloader {
+  50% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+@keyframes preloader {
+  50% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
