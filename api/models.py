@@ -120,7 +120,7 @@ class Reservation(models.Model):
     updated_datetime = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.user.user.username
+        return self.first_name
 
     @property
     def exp(self, expired = False):

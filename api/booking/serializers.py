@@ -25,13 +25,29 @@ class ReservationSerializer(serializers.ModelSerializer):
             'exp'
         )
 
-    def validate_reservation(self, user):
-        if Reservation.objects.filter(user=ProfileModel.objects.get(user_id=user)).exists():
-            raise serializers.ValidationError(_('Your reservation is already in the process.'))
-        return user
+    def validate_reservation(self, email):
+        print(Reservation.objects.filter(reserved_start_date__week_day=5))
+        if Reservation.objects.filter(email=email).exists():
+            raise serializers.ValidationError(_('You are already reserved.'))
+        return email
 
     def create_reservation(self, request):
-        self.validate_reservation(request.user.pk)
-        user_profile = ProfileModel.objects.get(user_id=request.user.pk)
-        Reservation.objects.create(user=user_profile)
+
+        data = self.get_initial()
+
+        first_name = data.get('first_name')
+        last_name = data.get('last_name')
+        email = data.get('email')
+        observation = data.get('observation')
+        reserved_start_date = data.get('reserved_start_date')
+
+        self.validate_reservation(email)
+
+        Reservation.objects.create(
+            first_name=first_name,
+            last_name=last_name,
+            email=email,
+            observation=observation,
+            reserved_start_date=reserved_start_date
+        )
         return request
