@@ -1,7 +1,6 @@
 from django.utils.translation import ugettext_lazy as _
 from rest_framework import serializers
 
-from api.auth.serializers import ProfileSerializer
 from api.models import ProfileModel, Reservation
 
 
@@ -10,13 +9,14 @@ class ReservationSerializer(serializers.ModelSerializer):
         Serializer for Reservation.
     '''
     reserved_end_date = serializers.DateTimeField(read_only=True)
-    user = ProfileSerializer(read_only=True)
 
     class Meta:
         model = Reservation
         fields =(
             'pk',
-            'user',
+            'first_name',
+            'last_name',
+            'email',
             'observation',
             'reserved_start_date',
             'reserved_end_date',
