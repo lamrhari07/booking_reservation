@@ -10,6 +10,7 @@ class BlogSerializer(serializers.ModelSerializer):
         Serializer for Blog Model.
     '''
     user = ProfileSerializer(read_only=True)
+    post_image = serializers.ImageField(required=False)
     created_at = serializers.DateTimeField(read_only=True)
     updated_at = serializers.DateTimeField(read_only=True)
     class Meta:
@@ -25,6 +26,6 @@ class BlogSerializer(serializers.ModelSerializer):
         )
 
     def create_blog(self, validated_data):
-        user_profile = ProfileModel.objects.get(user_id=validated_data.user.pk)
+        user_profile = ProfileModel.objects.get(user__id=validated_data.user.pk)
         BlogModel.objects.create(user=user_profile)
         return validated_data

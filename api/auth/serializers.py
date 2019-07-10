@@ -57,8 +57,8 @@ class ProfileSerializer(serializers.ModelSerializer):
         Serializer for User Model.
     '''
     avatar = serializers.ImageField(required=False)
-    user = UserSerializer()
-    address = AddressSerializer()
+    user = UserSerializer(required=False)
+    address = AddressSerializer(required=False)
     class Meta:
         model = ProfileModel
         fields =(
@@ -66,7 +66,9 @@ class ProfileSerializer(serializers.ModelSerializer):
             'user',
             'gender',
             'birth_date',
-            'address'
+            'phone',
+            'address',
+            'is_super'
         )
         depth=2
 
@@ -94,6 +96,7 @@ class ProfileSerializer(serializers.ModelSerializer):
         instance.birth_date = validated_data.get('birth_date', instance.birth_date)
         instance.gender = validated_data.get('gender', instance.gender)
         instance.phone = validated_data.get('phone', instance.phone)
+        instance.is_super = validated_data.get('is_super', instance.is_super)
 
         instance.save()
 

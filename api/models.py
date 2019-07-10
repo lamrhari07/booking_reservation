@@ -91,7 +91,7 @@ class BlogModel(models.Model):
     )
     title = models.CharField(_('Title'), max_length=204, default='', blank=True, null=True)
     post = models.TextField(_('Post'), max_length=5028, default='', blank=True, null=True)
-    post_image = models.ImageField(_('Post Image'), upload_to='avatar/', default='avatar/no-avatar.png',
+    post_image = models.ImageField(_('Post Image'), upload_to='blog/', default='blog/no-post.png',
                                blank=True, null=True)
     created_at = models.DateTimeField(_('Created at'), default=timezone.now)
     updated_at = models.DateTimeField(_('Updated at'), auto_now=True)
@@ -109,13 +109,10 @@ class Reservation(models.Model):
         (1, _("Accepted")),
         (2, _("Denied"))
     )
-
-    user = models.ForeignKey(
-        ProfileModel,
-        on_delete=models.CASCADE,
-        default='',
-        related_name='booker'
-    )
+    
+    first_name = models.CharField(_('First name'), max_length=204, default='', blank=True, null=True)
+    last_name = models.CharField(_('Last name'), max_length=204, default='', blank=True, null=True)
+    email = models.EmailField(_('Email'), blank=True, null=True)
     observation = models.TextField(_('Observation'), max_length=2500, default='')
     reserved_start_date = models.DateTimeField(_('Reserved at'), default=timezone.now)
     reserved_end_date = models.DateTimeField(_('Will end at'), default=(timezone.now() + timezone.timedelta(days=30)))

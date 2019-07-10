@@ -2,13 +2,12 @@ from rest_framework import status
 from rest_framework import generics
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
-from django.core.exceptions import ObjectDoesNotExist
 from api.models import BlogModel
 from api.blog.serializers import (
     BlogSerializer,
     ProfileModel
 )
-
+from api.pagination import BlogPageNumberPagination
 
 
 class BlogListView(generics.ListAPIView):
@@ -18,6 +17,7 @@ class BlogListView(generics.ListAPIView):
     queryset = BlogModel.objects.all()
     serializer_class = BlogSerializer
     permission_classes = [AllowAny,]
+    pagination_class = BlogPageNumberPagination
 
 
 
@@ -27,7 +27,7 @@ class BlogView(generics.ListCreateAPIView):
     """
     serializer_class = BlogSerializer
     permission_classes = [IsAuthenticated,]
-    lookup_field = 'user'
+    pagination_class = BlogPageNumberPagination
 
     def get_queryset(self):
         user = ProfileModel.objects.get(user__id=self.request.user.pk)
@@ -36,19 +36,19 @@ class BlogView(generics.ListCreateAPIView):
     def create(self, request, *args, **kwargs):
         serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
-        blog_serializer = serializer.create_blog(request)
+        serializer.create_blog(request)
 
         return Response(
-            blog_serializer.data,
+            serializer.data,
             status=status.HTTP_201_CREATED
         )
 
 class BlogUpdateView(generics.RetrieveUpdateDestroyAPIView):
     """
-        List Endpoint For All Blog.
+        Endpoint For Update Blog.
     """
     serializer_class = BlogSerializer
-    permission_classes = [AllowAny,]
+    permission_classes = [IsAuthenticated,]
     lookup_field = 'pk'
 
     def get_queryset(self):
