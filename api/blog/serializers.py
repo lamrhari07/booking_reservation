@@ -26,6 +26,15 @@ class BlogSerializer(serializers.ModelSerializer):
         )
 
     def create_blog(self, validated_data):
+        
+        data = self.get_initial()
+
+        title = data.get('title')
+        post = data.get('post')
+        post_image = data.get('post_image')
+
         user_profile = ProfileModel.objects.get(user__id=validated_data.user.pk)
-        BlogModel.objects.create(user=user_profile)
+        blog = BlogModel(user=user_profile, title=title, post=post, post_image=post_image)
+        blog.save()
+        
         return validated_data

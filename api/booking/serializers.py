@@ -26,7 +26,6 @@ class ReservationSerializer(serializers.ModelSerializer):
         )
 
     def validate_reservation(self, email):
-        print(Reservation.objects.filter(reserved_start_date__week_day=5))
         if Reservation.objects.filter(email=email).exists():
             raise serializers.ValidationError(_('You are already reserved.'))
         return email

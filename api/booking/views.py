@@ -1,6 +1,6 @@
 from rest_framework import status
 from rest_framework import generics
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 
 from api.models import Reservation, ProfileModel
@@ -8,7 +8,7 @@ from api.booking.serializers import (
     ReservationSerializer
 )
 
-class ReservationView(generics.ListCreateAPIView):
+class ReservationView(generics.ListAPIView):
     """
         Create/List Endpoint For Reservation.
     """
@@ -16,9 +16,14 @@ class ReservationView(generics.ListCreateAPIView):
     queryset = Reservation.objects.all()
     permission_classes = [AllowAny,]
 
-    def get_object(self):
-        user_profile = ProfileModel.objects.get(user=self.request.user)
-        return self.queryset.get(user=user_profile)
+
+
+class CreateReservationView(generics.CreateAPIView):
+    """
+        Create Endpoint For Reservation.
+    """
+    serializer_class = ReservationSerializer
+    permission_classes = [AllowAny,]
 
     def create(self, request, *args, **kwargs):
         serializer = self.serializer_class(data=request.data)

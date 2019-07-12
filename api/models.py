@@ -90,7 +90,7 @@ class BlogModel(models.Model):
         related_name='user_author'
     )
     title = models.CharField(_('Title'), max_length=204, default='', blank=True, null=True)
-    post = models.TextField(_('Post'), max_length=5028, default='', blank=True, null=True)
+    post = models.TextField(_('Post'), max_length=None, default='', blank=True, null=True)
     post_image = models.ImageField(_('Post Image'), upload_to='blog/', default='blog/no-post.png',
                                blank=True, null=True)
     created_at = models.DateTimeField(_('Created at'), default=timezone.now)
@@ -114,7 +114,7 @@ class Reservation(models.Model):
     last_name = models.CharField(_('Last name'), max_length=204, default='', blank=True, null=True)
     email = models.EmailField(_('Email'), blank=True, null=True)
     observation = models.TextField(_('Observation'), max_length=2500, default='')
-    reserved_start_date = models.DateTimeField(_('Reserved at'), default=timezone.now)
+    reserved_start_date = models.DateField(_('Reserved at'), default=timezone.now, null=True)
     reserved_end_date = models.DateTimeField(_('Will end at'), default=(timezone.now() + timezone.timedelta(days=30)))
     status = models.SmallIntegerField(_('Status'), choices=STATUS, default=0)
     updated_datetime = models.DateTimeField(auto_now=True)
