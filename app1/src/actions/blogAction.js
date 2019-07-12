@@ -1,5 +1,6 @@
 import { BlogTypes } from "./actionTypes";
 import axios from "axios";
+import history from "../utils/history";
 
 
 const BlogLoad = () => {
@@ -47,12 +48,16 @@ export const CreatePost = (inputs) => {
 
     return async (dispatch) => {
         try {
-            dispatch(BlogLoad())
             await axios.post(URL_ROOT, inputs, { headers: { "Authorization": `JWT ${token}` } })
+            alert('Post is created')
         } catch (error) {
             // If request is bad...
             // Show an error to the user   
             dispatch(BlogFailure(error))
+            if (error.response.status === 401) {
+                localStorage.removeItem('id_token')
+                history.push('/login')
+            }
         }
     }
 }

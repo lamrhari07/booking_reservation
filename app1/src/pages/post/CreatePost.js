@@ -15,16 +15,15 @@ import WidgetContainer from '../../components/Widget/WidgetContainer';
 
 
 const PostCreate = ({ error, classes, ...props }) => {
-    const [inputs, setInputs] = React.useState({file:{}});
-    const [image, setImage] = React.useState({ preview: '', raw: '' })
-    
-    const handleChange = (e) => {
-        setImage({
-            preview: URL.createObjectURL(e.target.files[0]),
-            raw: e.target.files[0]
-        })
+    const [image, setImage] = React.useState('');
+    const [inputs, setInputs] = React.useState({});
+
+    const handleChange = (event) => {
+        event.persist();
+        setImage(event.target.files[0])
     }
 
+    console.log(image);
     function handlePostCreate(event) {
         const { dispatch } = props;
         event.preventDefault();
@@ -33,17 +32,12 @@ const PostCreate = ({ error, classes, ...props }) => {
 
     function handleInputChange(event) {
         event.persist();
-
         setInputs(inputs => ({ ...inputs, [event.target.name]: event.target.value }))
-        
-        console.log(inputs);
-        
     }
 
     const InputForms = [
         { holder: 'Title', type: 'text', name: 'title', input: inputs.title },
         { holder: 'Post', type: 'text', name: 'post', input: inputs.post, multiline: true },
-        { holder: 'Post image', type: 'file', name: 'post_image', input: inputs.post_image },
     ].map((v, i) => {
         return (
             <TextField
@@ -66,17 +60,31 @@ const PostCreate = ({ error, classes, ...props }) => {
         )
     })
 
+
     return (
         <React.Fragment>
             <Grid container spacing={32}>
                 <Grid item xs={12} md={12} lg={6}>
                     <WidgetContainer>
+                        <TextField
+                            name='post_image'
+                            InputProps={{
+                                classes: {
+                                    underline: classes.textFieldUnderline,
+                                    input: classes.textField
+                                }
+                            }}
+                            onChange={handleChange}
+                            margin='normal'
+                            placeholder='Post image'
+                            type='file'
+                        />
                         {InputForms}
                         {props.isLoading ? (
                             <CircularProgress size={26} className={classes.loginLoader} />
                         ) : (
                                 <Button
-                                    className={classes.loader} 
+                                    className={classes.loader}
                                     onClick={(event) => handlePostCreate(event)}
                                     variant='contained'
                                     color='primary'
@@ -88,7 +96,11 @@ const PostCreate = ({ error, classes, ...props }) => {
                     </WidgetContainer>
                 </Grid>
                 <Grid item>
-                    <h1>sksks {inputs.title}</h1>
+                    <h1>Title: </h1>
+                    <h3>{inputs.title}</h3>
+                    
+                    <h1>Post: </h1>
+                    <h3>{inputs.post}</h3>
                 </Grid>
             </Grid>
         </React.Fragment>
@@ -117,7 +129,7 @@ const stateProps = (state) => {
 
 const PostsListWithData = lifecycle({
     componentDidMount() {
-
+        
     },
 });
 

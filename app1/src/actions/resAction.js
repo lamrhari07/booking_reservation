@@ -48,8 +48,7 @@ export const MakeReservation = (inputs) => {
     return async (dispatch) => {
         try {
             dispatch(ReserLoad())
-            const result = await axios.post(URL_ROOT, inputs)
-            const data = result.data
+            await axios.post(URL_ROOT, inputs)
             alert('Your reservation will be expired after 30 days');
             history.push('/')
         } catch (error) {

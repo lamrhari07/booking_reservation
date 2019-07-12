@@ -10,13 +10,12 @@ import Sidebar from '../Sidebar';
 // pages
 import Dashboard from '../../pages/dashboard/Dashboard';
 import PostPage from '../../pages/post/PostPage';
-import SinglePost from '../../pages/post/SinglePost';
 import EditProfile from '../../pages/login/EditProfile';
 import Header from '../Header/HeaderContainer';
 import CreatePost from '../../pages/post/CreatePost';
 import Reservation from '../../pages/reservation/Reservation';
 
-const LayoutView = ({ classes }) => {
+const LayoutView = ({ classes, ...props }) => {
 
   const [open, setOpen] = React.useState(false);
 
@@ -25,7 +24,7 @@ const LayoutView = ({ classes }) => {
       <CssBaseline />
       <BrowserRouter>
         <React.Fragment>
-          <Header open={open} setOpen={setOpen}/>
+          <Header open={open} setOpen={setOpen} data={props.data.data}/>
           <Sidebar open={open} setOpen={setOpen} />
           <div className={classnames(classes.content, { [classes.contentShift]: open })}>
             <div className={classes.fakeToolbar} />

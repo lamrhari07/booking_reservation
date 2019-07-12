@@ -176,7 +176,13 @@ const EditProfile = ({ classes, ...props }) => {
                                     )
                                 })
                             }
-                            <Button type='submit'>
+                            <br/>
+                            <Button
+                                type='submit'
+                                variant='contained'
+                                color='primary'
+                                size='large'
+                            >
                                 Submit
                             </Button>
                         </form>

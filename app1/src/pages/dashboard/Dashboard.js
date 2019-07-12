@@ -141,7 +141,7 @@ const stateProps = (state) => {
 const PostsListWithData = lifecycle({
   componentDidMount() {
     this.props.dispatch(UserProfile())
-  }
+  },
 });
 
 const styledComponent = withStyles(styles)(Dashboard);

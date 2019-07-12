@@ -5,7 +5,6 @@ import {
   IconButton,
   InputBase,
   Menu,
-  MenuItem,
   withStyles
 } from "@material-ui/core";
 import {
@@ -32,120 +31,88 @@ const Header = ({ classes, open, setOpen, ...props }) => {
 
   return (
     <AppBar position="fixed" className={classes.appBar}>
-    <Toolbar className={classes.toolbar}>
-      <IconButton
-        color="inherit"
-        onClick={!open ? (handleDrawerOpen):(handleDrawerClose)}
-        className={classNames(
-          classes.headerMenuButton,
-          classes.headerMenuButtonCollapse
-        )}
-      >
-        {open ? (
-          <ArrowBackIcon
-            classes={{
-              root: classNames(classes.headerIcon, classes.headerIconCollapse)
-            }}
-          />
-        ) : (
-          <MenuIcon
-            classes={{
-              root: classNames(classes.headerIcon, classes.headerIconCollapse)
-            }}
-          />
-        )}
-      </IconButton>
-      <Typography variant="h6" weight="medium" className={classes.logotype}>Bric. </Typography>
-      <div className={classes.grow} />
-      <div
-        className={classNames(classes.search, {
-          [classes.searchFocused]: props.isSearchOpen
-        })}
-      >
+      <Toolbar className={classes.toolbar}>
+        <IconButton
+          color="inherit"
+          onClick={!open ? (handleDrawerOpen) : (handleDrawerClose)}
+          className={classNames(
+            classes.headerMenuButton,
+            classes.headerMenuButtonCollapse
+          )}
+        >
+          {open ? (
+            <ArrowBackIcon
+              classes={{
+                root: classNames(classes.headerIcon, classes.headerIconCollapse)
+              }}
+            />
+          ) : (
+              <MenuIcon
+                classes={{
+                  root: classNames(classes.headerIcon, classes.headerIconCollapse)
+                }}
+              />
+            )}
+        </IconButton>
+        <Typography variant="h6" weight="medium" className={classes.logotype}>Bric. </Typography>
+        <div className={classes.grow} />
         <div
-          className={classNames(classes.searchIcon, {
-            [classes.searchIconOpened]: props.isSearchOpen
+          className={classNames(classes.search, {
+            [classes.searchFocused]: props.isSearchOpen
           })}
-          onClick={props.toggleSearch}
         >
-          <SearchIcon classes={{ root: classes.headerIcon }} />
-        </div>
-        <InputBase
-          placeholder="Search…"
-          classes={{
-            root: classes.inputRoot,
-            input: classes.inputInput
-          }}
-        />
-      </div>
-      
-      <IconButton
-        aria-haspopup="true"
-        color="inherit"
-        className={classes.headerMenuButton}
-        aria-controls="profile-menu"
-        onClick={props.openProfileMenu}
-      >
-        <AccountIcon classes={{ root: classes.headerIcon }} />
-      </IconButton>
-      <Menu
-        id="profile-menu"
-        open={Boolean(props.profileMenu)}
-        anchorEl={props.profileMenu}
-        onClose={props.closeProfileMenu}
-        className={classes.headerMenu}
-        classes={{ paper: classes.profileMenu }}
-        disableAutoFocusItem
-      >
-        <div className={classes.profileMenuUser}>
-          <Typography variant="h4" weight="medium">
-            John Smith
-          </Typography>
-          <Typography
-            className={classes.profileMenuLink}
-            component="a"
-            color="primary"
-            href="https://flatlogic.com"
+          <div
+            className={classNames(classes.searchIcon, {
+              [classes.searchIconOpened]: props.isSearchOpen
+            })}
+            onClick={props.toggleSearch}
           >
-            Flalogic.com
-          </Typography>
+            <SearchIcon classes={{ root: classes.headerIcon }} />
+          </div>
+          <InputBase
+            placeholder="Search…"
+            classes={{
+              root: classes.inputRoot,
+              input: classes.inputInput
+            }}
+          />
         </div>
-        <MenuItem
-          className={classNames(
-            classes.profileMenuItem,
-            classes.headerMenuItem
-          )}
+
+        <IconButton
+          aria-haspopup="true"
+          color="inherit"
+          className={classes.headerMenuButton}
+          aria-controls="profile-menu"
+          onClick={props.openProfileMenu}
         >
-          <AccountIcon className={classes.profileMenuIcon} /> Profile
-        </MenuItem>
-        <MenuItem
-          className={classNames(
-            classes.profileMenuItem,
-            classes.headerMenuItem
-          )}
+          <AccountIcon classes={{ root: classes.headerIcon }} />
+        </IconButton>
+        <Menu
+          id="profile-menu"
+          open={Boolean(props.profileMenu)}
+          anchorEl={props.profileMenu}
+          onClose={props.closeProfileMenu}
+          className={classes.headerMenu}
+          classes={{ paper: classes.profileMenu }}
+          disableAutoFocusItem
         >
-          <AccountIcon className={classes.profileMenuIcon} /> Tasks
-        </MenuItem>
-        <MenuItem
-          className={classNames(
-            classes.profileMenuItem,
-            classes.headerMenuItem
-          )}
-        >
-          <AccountIcon className={classes.profileMenuIcon} /> Messages
-        </MenuItem>
-        <div className={classes.profileMenuUser}>
-          <Typography
-            className={classes.profileMenuLink}
-            color="primary"
-            onClick={props.handleLogout}
-          >
-            Sign Out
+          <div className={classes.profileMenuUser}>
+            <Typography variant="h4" weight="medium">
+              John Smith
           </Typography>
-        </div>
-      </Menu>
-    </Toolbar>
-  </AppBar>
+          </div>
+          <div className={classes.profileMenuUser}>
+            <Typography
+              className={classes.profileMenuLink}
+              color="primary"
+              onClick={props.handleLogout}
+            >
+              Sign Out
+          </Typography>
+          </div>
+        </Menu>
+      </Toolbar>
+    </AppBar>
   )
 };
 
@@ -172,9 +139,6 @@ const styles = theme => ({
   toolbar: {
     paddingLeft: theme.spacing.unit * 2,
     paddingRight: theme.spacing.unit * 2
-  },
-  hide: {
-    display: "none"
   },
   grow: {
     flexGrow: 1
@@ -224,22 +188,8 @@ const styles = theme => ({
     paddingRight: 36 + theme.spacing.unit * 1.25,
     width: "100%"
   },
-  messageContent: {
-    display: "flex",
-    flexDirection: "column"
-  },
   headerMenu: {
     marginTop: theme.spacing.unit * 7
-  },
-  headerMenuList: {
-    display: "flex",
-    flexDirection: "column"
-  },
-  headerMenuItem: {
-    "&:hover, &:focus": {
-      backgroundColor: theme.palette.primary.main,
-      color: "white"
-    }
   },
   headerMenuButton: {
     marginLeft: theme.spacing.unit * 2,
@@ -263,13 +213,6 @@ const styles = theme => ({
     flexDirection: "column",
     padding: theme.spacing.unit * 2
   },
-  profileMenuItem: {
-    color: theme.palette.text.hint
-  },
-  profileMenuIcon: {
-    marginRight: theme.spacing.unit * 2,
-    color: theme.palette.text.hint
-  },
   profileMenuLink: {
     fontSize: 16,
     textDecoration: "none",
@@ -277,33 +220,7 @@ const styles = theme => ({
       cursor: "pointer"
     }
   },
-  messageNotification: {
-    height: "auto",
-    display: "flex",
-    alignItems: "center",
-    "&:hover, &:focus": {
-      backgroundColor: theme.palette.background.light
-    }
-  },
-  messageNotificationSide: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    marginRight: theme.spacing.unit * 2
-  },
-  messageNotificationBodySide: {
-    alignItems: "flex-start",
-    marginRight: 0
-  },
-  sendMessageButton: {
-    margin: theme.spacing.unit * 4,
-    marginTop: theme.spacing.unit * 2,
-    marginBottom: theme.spacing.unit * 2,
-    textTransform: "none"
-  },
-  sendButtonIcon: {
-    marginLeft: theme.spacing.unit * 2
-  }
+  
 });
 
 export default withStyles(styles)(Header);

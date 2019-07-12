@@ -22,7 +22,7 @@ const structure = [
   { id: 0, label: 'Dashboard', link: '/app/dashboard', icon: <HomeIcon /> },
   { id: 1, label: 'Blog', link: '/app/blog', icon: <TypographyIcon /> },
   { id: 2, label: 'Profile', link: '/app/profile', icon: <AccountCircle /> },
-  { id: 3, label: 'POst', link: '/app/post', icon: <NotificationsIcon />},
+  { id: 3, label: 'Reservation', link: '/app/reservation', icon: <NotificationsIcon />},
   { id: 5, type: 'divider' },
   { id: 6, type: 'title', label: 'HELP' },
   { id: 7, label: 'Library', link: '', icon: <LibraryIcon /> },

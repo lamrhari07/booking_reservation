@@ -90,6 +90,10 @@ export const UserProfile = () => {
             // If request is bad...
             // Show an error to the user 
             dispatch(UserFailure(error))
+            if (error.response.status === 401) {
+                localStorage.removeItem('id_token')
+                history.push('/login')
+            }
             //localStorage.clear()
         }
     }
@@ -116,6 +120,10 @@ export const EditUserProfile = (user, address, inputs) => {
             // If request is bad...
             // Show an error to the user_data
             UserFailure(error);
+            if (error.response.status === 401) {
+                localStorage.removeItem('id_token')
+                history.push('/login')
+            }
         }
     }
 }
