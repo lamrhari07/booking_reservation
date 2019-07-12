@@ -138,7 +138,7 @@ const Header = ({ classes, open, setOpen, ...props }) => {
           <Typography
             className={classes.profileMenuLink}
             color="primary"
-            onClick={props.signOut}
+            onClick={props.handleLogout}
           >
             Sign Out
           </Typography>

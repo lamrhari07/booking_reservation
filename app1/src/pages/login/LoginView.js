@@ -23,12 +23,11 @@ const LoginView = ({ classes, ...props }) => {
   function handleChange(event, newValue) {
     setValue(newValue);
   }
+  
   const handleInputChange = (event) => {
     event.persist();
     setInputs(inputs => ({ ...inputs, [event.target.name]: event.target.value }));
   }
-
-  console.log(props.error.response && props.error.response.data.non_field_errors)
 
   const handleLogin = (event) => {
     event.preventDefault();

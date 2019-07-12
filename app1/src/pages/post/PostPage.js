@@ -102,7 +102,7 @@ const PostPage = ({ blog, classes }) => {
 
   return (blog.isLoading ? <Loading /> :
     <React.Fragment>
-      <PageTitle title="Posts" />
+      <PageTitle title="Posts" button="Create New Post" to='/app/post/create' />
       <Grid container spacing={32}>
         {postList}
       </Grid>

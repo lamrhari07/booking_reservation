@@ -6,61 +6,17 @@ import { UserProfile } from "../../actions/authAction";
 
 import {
   Grid,
-  Table,
-  TableRow,
-  TableHead,
-  TableBody,
-  TableCell,
-  Button,
   withStyles,
 } from "@material-ui/core";
 import Widget from "../../components/Widget";
 import PageTitle from "../../components/PageTitle";
 import { Typography } from '../../components/Wrappers';
 import { Loading } from "../Loading";
+import ReservationTable from "../reservation/reservationTable";
 
 const Dashboard = ({ data, classes, theme }) => {
 
-  const InvitationTable = () => {
-    return (
-      <Table className="mb-0">
-        <TableHead>
-          <TableRow>
-            <TableCell>;s;s;s</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          <TableRow >
-            <TableCell className="pl-3 fw-normal">sss</TableCell>
-            <TableCell>sss@jdjd.com</TableCell>
-            <TableCell>Iphone</TableCell>
-            <TableCell>233.99$</TableCell>
-            <TableCell>2010-20-2</TableCell>
-            <TableCell>
-              <Button
-                size="small"
-                className="px-2"
-                variant="contained"
-                color="success"
-              >
-                Accept
-              </Button>
-            </TableCell>
-            <TableCell>
-              <Button
-                size="small"
-                className="px-2"
-                variant="contained"
-                color="secondary"
-              >
-                Delete
-              </Button>
-            </TableCell>
-          </TableRow>
-        </TableBody>
-      </Table>
-    )
-  }
+
 
   const ProfileWidgit = data.data.map((e, i) => {
     return (e &&
@@ -84,7 +40,7 @@ const Dashboard = ({ data, classes, theme }) => {
         </Grid>
         <Grid item lg={8} md={8} sm={6} xs={12}>
           <Widget
-            title="Your info"
+            title="Your Information"
             upperTitle
             className={classes.card}
             bodyClassNclassName={classes.fullHeightBody}
@@ -135,18 +91,19 @@ const Dashboard = ({ data, classes, theme }) => {
   return (
     <React.Fragment>
       <PageTitle title="Dashboard" button="Update Profile" to='/app/profile' />
-      { data.isLoading ? <Loading />
+      {data.isLoading ? <Loading />
         :
         <Grid container spacing={32} >
-          { ProfileWidgit}
+          {ProfileWidgit}
           <Grid item md={11} xs={12}>
             <Widget
               title="Invitation Table"
               upperTitle
               noBodyPadding
               bodyClassNclassName={classes.tableWidget}
+              disableWidgetMenu
             >
-              {InvitationTable()}
+              <ReservationTable />
             </Widget>
           </Grid>
         </Grid>

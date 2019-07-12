@@ -13,6 +13,8 @@ import PostPage from '../../pages/post/PostPage';
 import SinglePost from '../../pages/post/SinglePost';
 import EditProfile from '../../pages/login/EditProfile';
 import Header from '../Header/HeaderContainer';
+import CreatePost from '../../pages/post/CreatePost';
+import Reservation from '../../pages/reservation/Reservation';
 
 const LayoutView = ({ classes }) => {
 
@@ -30,8 +32,9 @@ const LayoutView = ({ classes }) => {
             <Switch>
               <Route path="/app/dashboard" component={Dashboard} />
               <Route path="/app/blog" component={PostPage} />
+              <Route path="/app/post/create" component={CreatePost} />
               <Route path="/app/profile" component={EditProfile} />
-              <Route path="/app/post" component={SinglePost} />
+              <Route path="/app/reservation" component={Reservation} />
             </Switch>
           </div>
         </React.Fragment>

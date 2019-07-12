@@ -53,8 +53,8 @@ export const UserRegistration = (inputs) => {
             dispatch(UserLoad())
             const result = await axios.post(URL_ROOT, inputs)
             const data = result.data
-            dispatch(UserSuccess(data))
-            localStorage.setItem("token", data.token);
+            localStorage.setItem("id_token", data.token);
+            history.push('/app')
         } catch (error) {
             // If request is bad...
             // Show an error to the user   
@@ -62,6 +62,21 @@ export const UserRegistration = (inputs) => {
         }
     }
 }
+
+export const UserLogOut = () => {
+    return async (dispatch) => {
+        try {
+            localStorage.removeItem("id_token");
+            history.push('/')
+        } catch (error) {
+            // If request is bad...
+            // Show an error to the user   
+            dispatch(UserFailure(error))
+            
+        }
+    }
+}
+
 export const UserProfile = () => {
     const URL_ROOT = "http://127.0.0.1:8000/profile/";
     const token = localStorage.getItem('id_token')

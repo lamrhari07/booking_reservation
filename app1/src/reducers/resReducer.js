@@ -1,21 +1,21 @@
-import { BlogTypes } from "../actions/actionTypes"
+import { ReservationTypes } from "../actions/actionTypes"
 
 
 const initState = {
     isLoading: false,
     data: [],
-    error:[]
+    error: []
 }
 
-export const blogReducer = (state = initState, action) => {
+export const resReducer = (state = initState, action) => {
     switch (action.type) {
-        case BlogTypes.BLOG_LOAD:
+        case ReservationTypes.RESERVE_LOAD:
             return { ...state, isLoading: true }
 
-        case BlogTypes.BLOG_SUCCESS:
+        case ReservationTypes.RESERVE_SUCCESS:
             return { ...state, isLoading: false, data: [action.payload] }
 
-        case BlogTypes.BLOG_FAILED:
+        case ReservationTypes.RESERVE_FAILED:
             return { ...state, isLoading: false, error: action.payload }
 
         default:
@@ -23,4 +23,4 @@ export const blogReducer = (state = initState, action) => {
     }
 }
 
-export default blogReducer;
+export default resReducer;
