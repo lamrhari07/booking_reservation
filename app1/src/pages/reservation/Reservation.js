@@ -18,7 +18,6 @@ import WidgetContainer from '../../components/Widget/WidgetContainer';
 const Reservations = ({ error, classes, ...props }) => {
     const [inputs, setInputs] = React.useState({})
 
-    console.log(error.response);
     function handleReservationCreate(event) {
         const { dispatch } = props;
         event.preventDefault();

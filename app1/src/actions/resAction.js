@@ -26,17 +26,22 @@ export const ReserFailure = (error) => {
 export const FetchReservation = () => {
 
     const URL_ROOT = 'http://127.0.0.1:8000/reservation/';
+    const token = localStorage.getItem('id_token')
 
     return async (dispatch) => {
         try {
             dispatch(ReserLoad())
-            const result = await axios.get(URL_ROOT)
+            const result = await axios.get(URL_ROOT, { headers: { "Authorization": `JWT ${token}` } })
             const data = result.data
             dispatch(ReserSuccess(data));
         } catch (error) {
             // If request is bad...
             // Show an error to the user   
             dispatch(ReserFailure(error))
+            if (error.response.status === 401) {
+                localStorage.removeItem('id_token')
+                history.push('/login')
+            }
         }
     }
 }

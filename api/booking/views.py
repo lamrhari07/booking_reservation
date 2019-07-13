@@ -9,19 +9,6 @@ from api.booking.serializers import (
     ReservationSerializer
 )
 
-class ReservationView(generics.ListAPIView):
-    """
-        Create/List Endpoint For Reservation.
-    """
-    serializer_class = ReservationSerializer
-    queryset = Reservation.objects.all()
-    permission_classes = [IsAuthenticated,]
-
-    filter_backends = (filters.SearchFilter,)
-    search_fields = ('first_name', 'status')
-
-
-
 
 class CreateReservationView(generics.CreateAPIView):
     """
@@ -35,3 +22,16 @@ class CreateReservationView(generics.CreateAPIView):
         serializer.is_valid(raise_exception=True)
         reservation = serializer.create_reservation(request)
         return Response(reservation.data, status=status.HTTP_201_CREATED)
+
+
+class ReservationView(generics.RetrieveUpdateDestroyAPIView):
+    """
+        Update/List/Delete Endpoint For Reservation.
+    """
+    serializer_class = ReservationSerializer
+    queryset = Reservation.objects.all()
+    permission_classes = [IsAuthenticated,]
+    lookup_field = 'pk'
+
+    filter_backends = (filters.SearchFilter,)
+    search_fields = ('first_name', 'status')
