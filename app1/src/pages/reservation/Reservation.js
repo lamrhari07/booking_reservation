@@ -117,11 +117,6 @@ const stateProps = (state) => {
     }
 }
 
-const PostsListWithData = lifecycle({
-    componentDidMount() {
-
-    },
-});
 
 const styledComponent = withStyles(styles)(Reservations)
-export default compose(connect(stateProps), PostsListWithData)(styledComponent);
+export default compose(connect(stateProps))(styledComponent);
