@@ -119,4 +119,4 @@ const stateProps = (state) => {
 
 
 const styledComponent = withStyles(styles)(Reservations)
-export default compose(connect(stateProps))(styledComponent);
+export default connect(stateProps)(styledComponent);

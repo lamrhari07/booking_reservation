@@ -27,6 +27,11 @@ const PostCreate = ({ error, classes, ...props }) => {
     function handlePostCreate(event) {
         const { dispatch } = props;
         event.preventDefault();
+        let form_data = new FormData();
+        form_data.append('post_image', image, image.name);
+        form_data.append('post', inputs.post);
+        form_data.append('title', inputs.title);
+        console.log(form_data)
         dispatch(CreatePost(inputs))
     }
 

@@ -61,7 +61,7 @@ const PostPage = ({ blog, classes }) => {
           <Grid key={result.id} item xs={12} md={3}>
             <Card className={classes.card}>
               <Post
-                title={result.title.split('', 10)}
+                title={result.title && result.title.split('', 10)}
                 created_at={result.created_at.split('T')[0]}
                 image={result.post_image}
               />

@@ -48,7 +48,12 @@ export const CreatePost = (inputs) => {
 
     return async (dispatch) => {
         try {
-            await axios.post(URL_ROOT, inputs, { headers: { "Authorization": `JWT ${token}` } })
+            await axios.post(URL_ROOT, inputs, {
+                headers: {
+                            "Authorization": `JWT ${token}`,
+                            'content-type': 'multipart/form-data'
+                        }
+                    })
             alert('Post is created')
         } catch (error) {
             // If request is bad...
