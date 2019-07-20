@@ -50,8 +50,7 @@ export const CreatePost = (inputs) => {
         try {
             await axios.post(URL_ROOT, inputs, {
                 headers: {
-                            "Authorization": `JWT ${token}`,
-                            'content-type': 'multipart/form-data'
+                            "Authorization": `JWT ${token}`
                         }
                     })
             alert('Post is created')
